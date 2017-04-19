@@ -56,8 +56,14 @@
                 this.next_page = null;
                 this.noResults = false;
             },
-            apiError: function () {
+            processError: function (error) {
                 this.searching = false;
+
+                if(error.response.status == 400) {
+                    this.missingTerm = true;
+                    return;
+                }
+                
                 this.apiError = true;
             },
             freshSearch: function (term) {
@@ -83,7 +89,7 @@
                 }).then((response) => {
                     this.processResults(response);
                 }).catch((error) => {
-                    this.apiError();
+                    this.processError(error);
                 });
                   
             }

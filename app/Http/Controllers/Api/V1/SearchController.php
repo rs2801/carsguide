@@ -12,7 +12,7 @@ class SearchController extends Controller
     public function index(Search $Search, Request $request)
     {
         if (!$request->has('term') || $request->term == "") {
-            abort(400);
+            return response()->json('Missing Term', 400);
         }
 
         $response = $Search->setTerm($request->term)
