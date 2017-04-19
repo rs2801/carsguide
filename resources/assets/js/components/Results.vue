@@ -9,17 +9,10 @@
             </div>
         </div>
 
-        <div class="ga-large" v-if="showRenderSpinner"><i class="glyphicon glyphicon-refresh spinning"></i> Loading tweets</div>
-        <div class="ga-large" v-if="noResults">No tweets found</div>
+        <loading-tweets v-if="showRenderSpinner"></loading-tweets>
+        <no-tweets v-if="noResults"></no-tweets>
 
-        <div class="pagination" v-if="(showPrevious || showNext)">
-            <button class="btn btn-info previousPage" v-if="showPrevious" v-on:click="loadPreviousPage">
-                <span>Previous Page</span>
-            </button>
-            <button class="btn btn-info nextPage" v-if="showNext" v-on:click="loadNextPage">
-                <span>Next Page</span>
-            </button>
-        </div>
+        <pagination :showPrevious="showPrevious" :showNext="showNext" v-on:previous="loadPreviousPage" v-on:next="loadNextPage"></pagination>
 
     </div>
 </template>

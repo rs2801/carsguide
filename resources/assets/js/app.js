@@ -41,6 +41,9 @@ Vue.component('twitter-card', require('./components/TwitterCard.vue'));
 Vue.component('api-error', require('./components/modals/apiError.vue'));
 Vue.component('missing-term', require('./components/modals/missingTerm.vue'));
 Vue.component('api-searching', require('./components/helpers/apiSearching.vue'));
+Vue.component('loading-tweets', require('./components/helpers/loadingTweets.vue'));
+Vue.component('no-tweets', require('./components/helpers/noTweets.vue'));
+Vue.component('pagination', require('./components/helpers/pagination.vue'));
 
 const app = new Vue({
     el: '#app'
