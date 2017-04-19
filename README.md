@@ -8,7 +8,11 @@ Twitter Search API
   - npm run production
 
 # Tests
-  - run "phpunit"
+  - command "phpunit"
+  - command "php artisan dusk"
+
+# Dusk Tests
+  - uses chrome driver to run tests
 
 # Caching
   - Software will cache the Bearer token so it only calls once

@@ -5,6 +5,10 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
+ /* Promise polyfill */
+require('es6-promise').polyfill();
+
 window.twttr = (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0],
     t = window.twttr || {};
