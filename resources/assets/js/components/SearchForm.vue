@@ -3,8 +3,8 @@
 
         <div class="form-group col-md-offset-3 col-md-6">
         	<form class="form-inline twitter-search" v-on:submit.prevent="submit">
-    			<input type="text" class="form-control input-lg" v-model="searchTerm" placeholder="Search term e.g. carsguide">
-    			<button class="btn btn-lg" v="submit">
+    			<input type="text" class="form-control input-lg searchTerm" name="searchTerm" v-model="searchTerm" placeholder="Search term e.g. carsguide">
+    			<button class="btn btn-lg searchSubmit" v="submit">
     				<i v-if="!searching" class="glyphicon glyphicon-search"></i>
     				<i v-else class="glyphicon glyphicon-refresh spinning"></i>
     			</button>

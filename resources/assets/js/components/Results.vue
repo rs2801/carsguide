@@ -9,14 +9,14 @@
             </div>
         </div>
 
-        <div v-if="showRenderSpinner"><i class="glyphicon glyphicon-refresh spinning"></i> Loading results</div>
-        <div v-if="noResults">No results found</div>
+        <div v-if="showRenderSpinner"><i class="glyphicon glyphicon-refresh spinning"></i> Loading tweets</div>
+        <div v-if="noResults">No tweets found</div>
 
         <div class="pagination" v-if="(showPrevious || showNext)">
-            <button class="btn btn-default btn-info" v-if="showPrevious" v-on:click="loadPreviousPage">
+            <button class="btn btn-info previousPage" v-if="showPrevious" v-on:click="loadPreviousPage">
                 <span>Previous Page</span>
             </button>
-            <button class="btn btn-default btn-info" v-if="showNext" v-on:click="loadNextPage">
+            <button class="btn btn-info nextPage" v-if="showNext" v-on:click="loadNextPage">
                 <span v-if="searching">Searching <i class="glyphicon glyphicon-refresh spinning"></i></span>
                 <span v-else>Next Page</span>
             </button>
