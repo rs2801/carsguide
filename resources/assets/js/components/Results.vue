@@ -9,16 +9,15 @@
             </div>
         </div>
 
-        <div v-if="showRenderSpinner"><i class="glyphicon glyphicon-refresh spinning"></i> Loading tweets</div>
-        <div v-if="noResults">No tweets found</div>
+        <div class="ga-large" v-if="showRenderSpinner"><i class="glyphicon glyphicon-refresh spinning"></i> Loading tweets</div>
+        <div class="ga-large" v-if="noResults">No tweets found</div>
 
         <div class="pagination" v-if="(showPrevious || showNext)">
             <button class="btn btn-info previousPage" v-if="showPrevious" v-on:click="loadPreviousPage">
                 <span>Previous Page</span>
             </button>
             <button class="btn btn-info nextPage" v-if="showNext" v-on:click="loadNextPage">
-                <span v-if="searching">Searching <i class="glyphicon glyphicon-refresh spinning"></i></span>
-                <span v-else>Next Page</span>
+                <span>Next Page</span>
             </button>
         </div>
 
@@ -41,10 +40,10 @@
             nextPage: {
                 default: null
             },
-            searching: {
+            noResults: {
                 default: false
             },
-            noResults: {
+            searching: {
                 default: false
             }
         },
@@ -57,8 +56,9 @@
         },
         computed: {
             filtered: function(){
-                if(this.searchResults.length < 1) {
+                if(this.searchResults.length === 0) {
                     this.page = 0;
+                    return false;
                 }
 
                 this.rendered = 0;
@@ -68,13 +68,10 @@
                 return (this.page > 0);
             },
             showNext: function(){
-                return (this.searchResults.length > 0 && this.nextPage);
-            },
-            showNoMoreTweets: function(){
-                return (this.noResults);
+                return ((this.page + 1) < this.searchResults.length || (this.nextPage && !this.searching));
             },
             showRenderSpinner: function(){
-                if(!this.filtered || (this.filtered.length == this.rendered)) {
+                if(!this.filtered || (this.filtered.length === this.rendered)) {
                     return false;
                 }
                 return true;

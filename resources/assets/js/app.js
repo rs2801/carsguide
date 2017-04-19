@@ -40,6 +40,7 @@ Vue.component('results-table', require('./components/Results.vue'));
 Vue.component('twitter-card', require('./components/TwitterCard.vue'));
 Vue.component('api-error', require('./components/modals/apiError.vue'));
 Vue.component('missing-term', require('./components/modals/missingTerm.vue'));
+Vue.component('api-searching', require('./components/helpers/apiSearching.vue'));
 
 const app = new Vue({
     el: '#app'

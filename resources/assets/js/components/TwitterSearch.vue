@@ -4,7 +4,9 @@
         <h1 class="searchTitle">Twitter search.</h1>
 
         <search-form :searching="searching" v-on:search="freshSearch(arguments[0])"></search-form>
-        <results-table :searchResults="results" :nextPage="next_page" :noResults="noResults" :searching="searching" v-on:search="search()"></results-table>
+        <api-searching v-if="searching" :term="searchTerm" :more="next_page"></api-searching>
+        <results-table :searchResults="results" :nextPage="next_page" :searching="searching" :noResults="noResults" v-on:search="search()"></results-table>
+        
         <missing-term v-if="missingTerm" v-on:close="missingTerm = false"></missing-term>
         <api-error v-if="apiError" v-on:close="apiError = false"></api-error>
 
@@ -32,14 +34,14 @@
                 var key = response.data.next_page;
 
                 if(!results) {
-                    this.apiError();
+                    this.apiError = true;
                     return;
                 }
                 
                 this.next_page = key;
                 this.searching = false;
 
-                if(results.length < 1) {
+                if(results.length === 0) {
                     this.noResults = true;
                     return;
                 }
@@ -50,7 +52,7 @@
                     this.resultKeys[key] = 0;
                 }
             },
-            resetResults: function () {
+            reset: function () {
                 this.results = [];
                 this.resultKeys = [];
                 this.next_page = null;
@@ -67,7 +69,7 @@
                 this.apiError = true;
             },
             freshSearch: function (term) {
-                this.resetResults();
+                this.reset();
                 this.searchTerm = term;
 
                 if(this.searchTerm == "") {
