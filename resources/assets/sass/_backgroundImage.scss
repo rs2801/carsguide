@@ -1,0 +1,29 @@
+.backgroundImage {
+	background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index:-1;
+}
+
+@media only screen and (min-width: 1200px) {
+    .backgroundImage {
+    	background-image: url('assets/images/background_l.jpg');
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .backgroundImage {
+    	background-image: url('assets/images/background_m.jpg');
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .backgroundImage {
+    	background-image: url('assets/images/background_s.jpg');
+    }
+}

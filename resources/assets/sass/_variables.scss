@@ -1,0 +1,52 @@
+
+//colors
+$carsguide: #8862d4;
+
+// Body
+$body-bg: #f5f8fa;
+
+// Borders
+$laravel-border-color: darken($body-bg, 10%);
+$list-group-border: $laravel-border-color;
+$panel-default-border: $laravel-border-color;
+$panel-inner-border: $laravel-border-color;
+
+// Brands
+$brand-primary: #3097D1;
+$brand-info: $carsguide;
+$brand-success: #2ab27b;
+$brand-warning: #cbb956;
+$brand-danger: #bf5329;
+
+// Typography
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+$font-family-sans-serif: "Source Sans Pro", sans-serif;
+$font-size-base: 14px;
+$line-height-base: 1.6;
+$text-color: #FFFFFF;
+
+// Navbar
+$navbar-default-bg: $carsguide;
+$navbar-default-border: $carsguide;
+$navbar-border-radius: 0px;
+
+// Buttons
+$btn-default-color: $text-color;
+$padding-large-horizontal: 8px;
+ 
+// Inputs
+$input-border: lighten($text-color, 40%);
+$input-border-focus: lighten($brand-primary, 25%);
+$input-border-radius: 20px;
+$input-border-radius-large: 30px;
+$input-color-placeholder: lighten($text-color, 30%);
+
+// Panels
+$panel-default-heading-bg: #fff;
+
+//Headings
+$headings-font-weight: 700;
+$font-size-h1: floor(($font-size-base * 2.1)) ; 
+$font-size-h2: floor(($font-size-base * 1.8));
+$font-size-h3: ceil(($font-size-base * 1.6));
+$font-size-h4: ceil(($font-size-base * 1.4));

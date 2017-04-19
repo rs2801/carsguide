@@ -1,0 +1,25 @@
+body {
+	overflow-y: scroll;
+}
+
+.navbar-header {
+    float: none;
+}
+
+.navbar-brand {
+    float: none;
+    text-align: center;
+
+    img {
+        height: 25px;
+    }
+}
+
+.form-control::-webkit-input-placeholder { color: #CCCCCC; }
+.form-control:-moz-placeholder { color: #CCCCCC; }
+.form-control::-moz-placeholder { color: #CCCCCC; }
+.form-control:-ms-input-placeholder { color: #CCCCCC; }
+
+.form-control {
+	display: unset;
+}

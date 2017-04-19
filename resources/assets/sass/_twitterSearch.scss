@@ -1,0 +1,43 @@
+.searchTitle {
+	margin-bottom: 30px;
+} 
+
+.twitter-search {
+
+	input {
+		width: 80% !important; 
+	}
+
+	.btn {
+		border: 0px;
+		background: transparent;
+		outline: none !important;
+	}
+
+}
+
+.twitter-wrap {
+	max-width: 550px;
+	margin: 0 auto;
+}
+
+.twitter-card {
+	padding: 15px 8px;
+	border-bottom: 1px solid #777;
+	text-align: left;
+	color: #444;
+
+	.avatar {
+    	float: left;
+    	width: 60px;
+	}
+
+	.content {
+    	margin-left: 60px;
+	}
+
+	a {
+		color: #444;
+	}
+	
+}
