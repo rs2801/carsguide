@@ -74,7 +74,7 @@ class Search extends BaseHandler
         //if response is 401, bearer invalid, regenerate once and search
         if ($this->responseCode == 401 && !$this->regenerate) {
             $this->regenerateBearer();
-            $this->search();
+            $this->process();
         }
 
         if (isset($this->response->errors) || $this->responseCode != 200) {
