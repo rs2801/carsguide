@@ -25,6 +25,13 @@ class ApiSearchControllerTest extends TestCase
         $response->assertStatus(400);
     }
 
+    public function testApiReturns405InvalidMethod()
+    {
+        $response = $this->json('POST', '/api/search', ['term' => null]);
+
+        $response->assertStatus(405);
+    }
+
     public function testResponseJsonStructure()
     {
         $response = $this->json('GET', '/api/search', ['term' => 'carsguide']);

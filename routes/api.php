@@ -11,4 +11,6 @@
 |
  */
 
-Route::resource('search', 'Api\V1\SearchController');
+Route::resource('search', 'Api\V1\SearchController', ['only' => [
+    'index',
+]]);
