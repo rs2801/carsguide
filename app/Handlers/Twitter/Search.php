@@ -52,7 +52,7 @@ class Search extends BaseHandler
         }
 
         return (object) [
-            'results' => $results,
+            'results' => $results->pluck('id_str'),
             'next_page' => $next_page,
         ];
     }

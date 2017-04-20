@@ -1,18 +1,18 @@
 <template>
     <div>
 
-        <div class="row" v-if="filtered">
+        <div class="row" v-if="tweets">
             <div class="twitter-wrap clearfix">
-                <div class="clearfix" v-for="item in filtered">
-                    <twitter-card :item="item" :key="item.id_str"></twitter-card>
+                <div class="clearfix" v-for="tweet in tweets">
+                    <twitter-card :tweet="tweet" :key="tweet"></twitter-card>
                 </div>
             </div>
         </div>
 
-        <loading-tweets v-if="showRenderSpinner"></loading-tweets>
+        <loading-tweets v-if="loadingTweets"></loading-tweets>
         <no-tweets v-if="noResults"></no-tweets>
 
-        <pagination :showPrevious="showPrevious" :showNext="showNext" v-on:previous="loadPreviousPage" v-on:next="loadNextPage"></pagination>
+        <pagination :totalPages="totalPages" :currentPage="currentPage" :allowLoadMore="allowLoadMore" v-on:load="loadMore" v-on:page="loadPage"></pagination>
 
     </div>
 </template>
@@ -21,8 +21,9 @@
     export default {
     	data: function() {
             return {
-                'page': 0,
-                'rendered': 0
+                'currentPage': 0,
+                'loadedTweets': 0,
+                'totalPages': 0
             }
         },
         props: {
@@ -43,45 +44,39 @@
         mounted: function() {
             twttr.ready(function (twttr) {
                 twttr.events.bind('rendered', function (ev) {
-                    this.rendered = this.rendered + 1;
+                    this.loadedTweets = this.loadedTweets + 1;
                 }.bind(this));
             }.bind(this));
         },
         computed: {
-            filtered: function(){
+            tweets: function(){
                 if(this.searchResults.length === 0) {
-                    this.page = 0;
+                    this.currentPage = 0;
+                    this.totalPages = 0;
                     return false;
                 }
 
-                this.rendered = 0;
-                return this.searchResults.slice(this.page, (this.page + 1))[0];
+                this.loadedTweets = 0;
+                this.totalPages = this.searchResults.length;
+                return this.searchResults.slice(this.currentPage, (this.currentPage + 1))[0];
             },
-            showPrevious: function(){
-                return (this.page > 0);
+            allowLoadMore: function(){
+                return (this.nextPage && !this.searching);
             },
-            showNext: function(){
-                return ((this.page + 1) < this.searchResults.length || (this.nextPage && !this.searching));
-            },
-            showRenderSpinner: function(){
-                if(!this.filtered || (this.filtered.length === this.rendered)) {
+            loadingTweets: function(){
+                if(!this.tweets || (this.tweets.length === this.loadedTweets)) {
                     return false;
                 }
+
                 return true;
             }
         },
         methods: {
-            loadPreviousPage: function () {
-                this.page--;
+            loadPage: function (pageNum) {
+                this.currentPage = pageNum;
             },
-            loadNextPage: function () {
-
-                this.page++;
-                if(this.filtered) {
-                    return;
-                }
-
-                //not cached, next
+            loadMore: function () {
+                this.currentPage = this.searchResults.length;
                 this.$emit('search');
             }
         }

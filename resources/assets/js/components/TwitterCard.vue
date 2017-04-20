@@ -1,17 +1,17 @@
 <template>
     <div>
-        <div :id="item.id_str"></div>
+        <div :id="tweet"></div>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['item'],
+        props: ['tweet'],
         mounted: function () {
 
             twttr.widgets.createTweet(
-              this.item.id_str,
-              document.getElementById(this.item.id_str),
+              this.tweet,
+              document.getElementById(this.tweet),
               {
                 conversation: 'none',
                 width: 550,

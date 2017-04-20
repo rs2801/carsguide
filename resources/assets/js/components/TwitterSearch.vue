@@ -3,11 +3,14 @@
         
         <h1 class="searchTitle">Twitter search.</h1>
 
-        <search-form :searching="searching" v-on:search="freshSearch(arguments[0])"></search-form>
+        <search-form :searching="searching" v-on:search="newSearch(arguments[0])"></search-form>
+
         <api-searching v-if="searching" :term="searchTerm" :more="next_page"></api-searching>
+
         <results-table :searchResults="results" :nextPage="next_page" :searching="searching" :noResults="noResults" v-on:search="search()"></results-table>
         
         <missing-term v-if="missingTerm" v-on:close="missingTerm = false"></missing-term>
+
         <api-error v-if="apiError" v-on:close="apiError = false"></api-error>
 
     </div>
@@ -21,14 +24,15 @@
                 'searchTerm': null,
                 'next_page': null,
                 'results': [],
-                'resultKeys': [],
                 'apiError': false,
                 'missingTerm': false,
                 'noResults': false,
             }
         },
         methods: {
-            processResults: function (response) {
+            processSuccess: function (response) {
+
+                this.searching = false;
 
                 var results = response.data.results;
                 var key = response.data.next_page;
@@ -39,22 +43,16 @@
                 }
                 
                 this.next_page = key;
-                this.searching = false;
 
                 if(results.length === 0) {
                     this.noResults = true;
                     return;
                 }
 
-                if(typeof this.resultKeys[key] === 'undefined' && results.length > 1) {
-                    this.noResults = false;
-                    this.results.push(results);
-                    this.resultKeys[key] = 0;
-                }
+                this.results.push(results);
             },
             reset: function () {
                 this.results = [];
-                this.resultKeys = [];
                 this.next_page = null;
                 this.noResults = false;
             },
@@ -68,11 +66,11 @@
                 
                 this.apiError = true;
             },
-            freshSearch: function (term) {
+            newSearch: function (term) {
                 this.reset();
                 this.searchTerm = term;
 
-                if(this.searchTerm == "") {
+                if(!this.searchTerm) {
                     this.missingTerm = true;
                     return;
                 }
@@ -89,7 +87,7 @@
                         'next_page': this.next_page,
                     }
                 }).then((response) => {
-                    this.processResults(response);
+                    this.processSuccess(response);
                 }).catch((error) => {
                     this.processError(error);
                 });

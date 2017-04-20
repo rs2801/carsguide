@@ -28,51 +28,47 @@ class BasicTest extends DuskTestCase
         });
     }
 
-    public function testSubmitFormShouldSeeFollow()
+    public function testSearchAndShouldSeeLoadMore()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(self::JsWait)
                 ->click('.searchSubmit')
                 ->pause(self::JsWaitApi)
-                ->assertSee('Next Page');
+                ->assertSee('Load more');
         });
     }
 
-    public function testNextPageShouldSeePreviousPage()
+    public function testSearchAndShouldSeePaginationPageOne()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(self::JsWait)
                 ->click('.searchSubmit')
                 ->pause(self::JsWaitApi)
-                ->click('.nextPage')
-                ->pause(self::JsWaitApi)
-                ->assertSee('Previous Page');
+                ->assertSeeIn('.pagination', '1');
         });
     }
 
-    public function testNextPageClickPreviousPageShouldHidePreviousPage()
+    public function testLoadMoreShouldGoToPageTwo()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(self::JsWait)
                 ->click('.searchSubmit')
                 ->pause(self::JsWaitApi)
-                ->click('.nextPage')
+                ->clickLink('Load more')
                 ->pause(self::JsWaitApi)
-                ->click('.previousPage')
-                ->pause(self::JsWaitApi)
-                ->assertDontSee('Previous Page');
+                ->assertSeeIn('.pagination', '2');
         });
     }
 
-    public function testShouldSeeNoResultsFound()
+    public function testSearchShouldSeeNoResultsFound()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(self::JsWait)
-                ->type('searchTerm', '"random long invalid search with no results"')
+                ->type('searchTerm', '"random_long_invalid_search_with_no_results"')
                 ->click('.searchSubmit')
                 ->pause(self::JsWaitApi)
                 ->assertSee('No tweets found');
