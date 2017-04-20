@@ -11,6 +11,7 @@
 
         <loading-tweets v-if="loadingTweets"></loading-tweets>
         <no-tweets v-if="noResults"></no-tweets>
+        <all-results-found v-if="allResultsFound"></all-results-found>
 
         <pagination :totalPages="totalPages" :currentPage="currentPage" :allowLoadMore="allowLoadMore" v-on:load="loadMore" v-on:page="loadPage"></pagination>
 
@@ -69,6 +70,13 @@
                 }
 
                 return true;
+            },
+            allResultsFound: function(){
+                if(!this.loadingTweets && this.totalPages > 0 && !this.allowLoadMore && (this.currentPage+1) === this.totalPages) {
+                    return true;
+                }
+
+                return false;
             }
         },
         methods: {

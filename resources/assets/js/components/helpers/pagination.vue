@@ -3,16 +3,16 @@
   	<div>
   		<ul class="pagination" v-if="totalPages > 0">
   			<li v-if="showStart">
-  			 	<a v-on:click.prevent="loadPage(1)" href="#"><i class="glyphicon glyphicon-step-backward"></i></a>
+  			 	<a v-on:click.prevent="loadPage(1)" href="#" title="First Page"><i class="glyphicon glyphicon-step-backward"></i></a>
   			 </li>
   			 <li v-for="page in paginationRange" :class="{active : isActivePage(page)}">
-  			 	<a v-on:click.prevent="loadPage(page)" href="#">{{ page }}</a>
+  			 	<a v-on:click.prevent="loadPage(page)" href="#" :title="'Page ' + page">{{ page }}</a>
   			 </li>
   			 <li v-if="showEnd">
-  			 	<a v-on:click.prevent="loadPage(totalPages)" href="#"><i class="glyphicon glyphicon-step-forward"></i></a>
+  			 	<a v-on:click.prevent="loadPage(totalPages)" href="#" title="Last Page"><i class="glyphicon glyphicon-step-forward"></i></a>
   			 </li>
   			 <li v-if="allowLoadMore">
-  			 	<a v-on:click.prevent="loadMore" class="loadMore" href="#">Load more</a>
+  			 	<a v-on:click.prevent="loadMore" class="loadMore" href="#" title="Load more tweets">Load more</a>
   			 </li>
   		</ul>
     </div>

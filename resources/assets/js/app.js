@@ -44,6 +44,7 @@ Vue.component('api-searching', require('./components/helpers/apiSearching.vue'))
 Vue.component('loading-tweets', require('./components/helpers/loadingTweets.vue'));
 Vue.component('no-tweets', require('./components/helpers/noTweets.vue'));
 Vue.component('pagination', require('./components/helpers/pagination.vue'));
+Vue.component('all-results-found', require('./components/helpers/allResultsFound.vue'));
 
 const app = new Vue({
     el: '#app'

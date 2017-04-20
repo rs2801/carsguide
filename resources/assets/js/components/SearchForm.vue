@@ -4,7 +4,7 @@
         <div class="form-group col-md-offset-3 col-md-6">
         	<form class="form-inline twitter-search" v-on:submit.prevent="submit">
     			<input type="text" class="form-control input-lg searchTerm" name="searchTerm" v-model="searchTerm" placeholder="Search term e.g. carsguide">
-    			<button class="btn btn-lg searchSubmit" v="submit">
+    			<button class="btn btn-lg searchSubmit" v="submit" title="Search">
     				<i class="glyphicon glyphicon-search"></i>
     			</button>
     		</form>
