@@ -13,15 +13,25 @@ class ApiSearchControllerTest extends TestCase
      */
     public function testResponseValid()
     {
-        $response = $this->get('/api/search?term=carsguide');
+        $response = $this->json('GET', '/api/search', ['term' => 'carsguide']);
 
         $response->assertStatus(200);
     }
 
     public function testMissingTermShouldReturn400()
     {
-        $response = $this->get('/api/search');
+        $response = $this->json('GET', '/api/search', ['term' => null]);
 
         $response->assertStatus(400);
+    }
+
+    public function testResponseJsonStructure()
+    {
+        $response = $this->json('GET', '/api/search', ['term' => 'carsguide']);
+
+        $response->assertJson([
+            'results' => true,
+            'next_page' => true,
+        ]);
     }
 }
